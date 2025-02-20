@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    telegram_id TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS expenses (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    description TEXT NOT NULL,
+    amount MONEY NOT NULL,
+    category TEXT NOT NULL,
+    added_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
